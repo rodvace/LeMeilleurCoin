@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row mb-2"><h1>Connectez-vous à votre compte</h1></div>
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Adresse E-mail</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrez votre adresse e-mail">
+            <small id="emailHelp" class="form-text text-muted">Nous ne communiquerons cette adresse avec personne.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Mot de passe</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Entrez votre mot de passe">
+        </div>
+        <button type="submit" class="btn btn-primary">Valider</button>
+    </form>
+
+{% endblock %}
+
+
+{% block stylesheets %}
+
+{% endblock %}

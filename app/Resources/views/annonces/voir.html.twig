@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row mb-2"><h1>Annonces en ligne</h1></div>
+    <div class="row">
+        {% for ad in ads %}
+            <div class="card mt-3 mb-3 ml-3 mr-2" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ad.title}}</h5>
+                    <p class="card-text">{{ad.description}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ad.city}} {{ad.zip}}</li>
+                    <li class="list-group-item">{{ad.price}} €</li>
+                    <li class="list-group-item">{{ad.datecreated|date}}</li>
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+
+{% block stylesheets %}
+
+{% endblock %}
