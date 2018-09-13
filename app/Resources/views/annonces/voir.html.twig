@@ -1,18 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="row mb-2"><h1>Annonces en ligne</h1></div>
-    <div class="row">
+    <div class="row mb-3"><h1>Annonces en ligne</h1></div>
+    <div class="row" style="margin:auto;">
         {% for ad in ads %}
-            <div class="card mt-3 mb-3 ml-3 mr-2" style="width: 18rem;">
-                <div class="card-body">
+            <div class="card mb-4 ml-5" style="width: 18rem;">
+                <img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/000/101/237/non_2x/free-abstract-background-11-vector.jpg" alt="Card image cap">
+                <div class="card-body bg-dark text-white">
                     <h5 class="card-title">{{ad.title}}</h5>
-                    <p class="card-text">{{ad.description}}</p>
+                    <p class="card-text">
+                        {{ ad.description|length > 25 ? ad.description|slice(0,25)|raw : ad.description|raw }}
+                        {{ ad.description|length > 25 ? '...' : ''}}
+                    </p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{ad.city}} {{ad.zip}}</li>
-                    <li class="list-group-item">{{ad.price}} €</li>
+                    <li class="list-group-item bg-info text-white">{{ad.city}} - {{ad.zip}}</li>
+                    <li class="list-group-item"><strong>{{ad.price}} €</strong></li>
                     <li class="list-group-item">{{ad.datecreated|date}}</li>
+                    <li class="list-group-item"><a href="{{ path('annonces_details',{'id':ad.id}) }}"><button type="button" class="btn btn-dark">Détails</button></a></li>
                 </ul>
             </div>
         {% endfor %}

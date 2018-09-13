@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Ad;
+use AppBundle\Entity\Categorie;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Validator\Constraints\Length;
@@ -33,7 +34,7 @@ class AnnoncesController extends Controller
     {
         $ad = new Ad();
 
-        // Je gagne en ligne de code car le formbuilder est au niveau de CountryType
+        // Je gagne en ligne de code car le formbuilder est au niveau de DeposerType
         $form = $this->createForm(DeposerType::class, $ad);
 
         $form->handleRequest($request);
@@ -49,9 +50,27 @@ class AnnoncesController extends Controller
     }
 
     /**
-     * @Route(name="nouvelle", path="/nouvelle")
+     * L'ordre des routes est important. Si /list est après get, et bien le système va tenter d'afficher une ville nommé list
+     *
+     * @Route(name="voir", path="/voir")
      */
-    public function nouvelleAction()
+    public function voirAction(Request $request)
+    {
+        $ads = $this
+            ->getDoctrine()
+            ->getRepository(Ad::class)
+            ->findAll();
+
+        return $this->render(
+            'annonces/voir.html.twig',
+            ['ads' => $ads]
+        );
+    }
+
+    /**
+     * @Route(name="ajoutdirect", path="/ajoutdirect")
+     */
+    public function ajoutdirectAction()
     {
         $ads = [
             ['PC Portable', 'Vends pc acer en très bon état', 'Paris', '75002', 175],
@@ -80,20 +99,18 @@ class AnnoncesController extends Controller
     }
 
     /**
-     * L'ordre des routes est important. Si /list est après get, et bien le système va tenter d'afficher une ville nommé list
-     *
-     * @Route(name="Voir", path="/voir")
+     * @Route(name="details", path="/details/{id}")
      */
-    public function VoirAction(Request $request)
+    public function detailsAction(Request $request)
     {
-        $ads = $this
+        $id = $request->get('id');
+        $ad = $this
             ->getDoctrine()
             ->getRepository(Ad::class)
-            ->findAll();
-
-        return $this->render(
-            'annonces/voir.html.twig',
-            ['ads' => $ads]
-        );
+            ->find($id);
+        return $this->render('annonces/details.html.twig', [
+            'ad' => $ad,
+        ]);
     }
+
  }

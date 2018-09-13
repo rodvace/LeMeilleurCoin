@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
     <div class="row mb-2"><h1>Déposer une annonce</h1></div>
+
+    <div class="container col-8">
     {{ form_start(form) }}
         {{ form_widget(form) }}
-         <input type="submit" name="send">
+        <div align="right">
+         <input type="submit" name="send" class="btn btn-primary">
+        </div>
     {{ form_end(form) }}
+    </div>
 
 {% endblock %}
 

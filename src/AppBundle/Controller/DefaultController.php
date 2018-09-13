@@ -21,7 +21,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/faq", name="FAQ")
+     * @Route("/faq", name="faq")
      */
     public function FaqAction()
     {
@@ -29,18 +29,10 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/cgu", name="CGU")
+     * @Route("/cgu", name="cgu")
      */
     public function CguAction()
     {
         return $this->render('default/cgu.html.twig');
-    }
-
-    /**
-     * @Route("/connexion", name="connexion")
-     */
-    public function ConnexionAction()
-    {
-        return $this->render('default/connexion.html.twig');
     }
 }
