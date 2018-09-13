@@ -68,7 +68,6 @@ class Ad
     */
     private $categorie;
 
-
     /**
      * @return mixed
      */

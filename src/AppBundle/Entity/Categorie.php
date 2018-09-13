@@ -68,10 +68,10 @@ class Categorie
         return ucfirst($this->name);
     }
 
-    ///**
-    // * @ORM\OneToMany(targetEntity="Ad", mappedBy="categorie", cascade={"persist"})
-    // */
-    //private $ads;
+    public function __toString()
+    {
+        return $this->name;
+    }
 
 }
 

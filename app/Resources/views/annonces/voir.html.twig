@@ -16,6 +16,7 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item bg-info text-white">{{ad.city}} - {{ad.zip}}</li>
                     <li class="list-group-item"><strong>{{ad.price}} €</strong></li>
+                    <li class="list-group-item">{{ad.categorie}}</li>
                     <li class="list-group-item">{{ad.datecreated|date}}</li>
                     <li class="list-group-item"><a href="{{ path('annonces_details',{'id':ad.id}) }}"><button type="button" class="btn btn-dark">Détails</button></a></li>
                 </ul>
