@@ -56,10 +56,11 @@ class AnnoncesController extends Controller
      */
     public function voirAction(Request $request)
     {
+        $tag = $request->get('tag', '');
         $ads = $this
             ->getDoctrine()
             ->getRepository(Ad::class)
-            ->findAll();
+            ->findByTag($tag);
 
         return $this->render(
             'annonces/voir.html.twig',

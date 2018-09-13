@@ -10,4 +10,20 @@ namespace AppBundle\Repository;
  */
 class AdRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByTag($tag)
+    {
+        $dql = <<<DQL
+SELECT a, c
+FROM AppBundle:Ad a 
+INNER JOIN a.categorie c 
+WHERE a.title LIKE :tag OR a.description LIKE :tag OR c.name LIKE :tag
+DQL;
+
+        return $this
+            ->getEntityManager()
+            ->createQuery($dql)
+            ->setParameter('tag','%'.$tag.'%')
+            ->getResult();
+
+    }
 }
