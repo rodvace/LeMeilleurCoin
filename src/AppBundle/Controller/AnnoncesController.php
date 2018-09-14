@@ -39,6 +39,8 @@ class AnnoncesController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $ad->setUser($this->getUser());
+
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->persist($ad);
@@ -68,10 +70,10 @@ class AnnoncesController extends Controller
         );
     }
 
-    /**
+    /*/**
      * @Route(name="ajoutdirect", path="/ajoutdirect")
      */
-    public function ajoutdirectAction()
+   /* public function ajoutdirectAction()
     {
         $ads = [
             ['PC Portable', 'Vends pc acer en très bon état', 'Paris', '75002', 175],
@@ -98,6 +100,7 @@ class AnnoncesController extends Controller
 
         return new Response('<html><body></body></html>');
     }
+   */
 
     /**
      * @Route(name="details", path="/details/{id}")
@@ -111,6 +114,22 @@ class AnnoncesController extends Controller
             ->find($id);
         return $this->render('annonces/details.html.twig', [
             'ad' => $ad,
+        ]);
+    }
+
+    /**
+     * @Route(name="mesannonces", path="/mesannonces")
+     */
+    public function mesAnnoncesAction(Request $request)
+    {
+        $user_id = $this->getUser()->getId();
+        $ads = $this
+            ->getDoctrine()
+            ->getRepository(Ad::class)
+            ->findMyAds($user_id);
+
+        return $this->render('annonces/mesannonces.html.twig', [
+            'ads' => $ads,
         ]);
     }
 

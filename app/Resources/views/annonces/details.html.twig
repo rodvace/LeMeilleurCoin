@@ -6,8 +6,11 @@
 <div class="row mb-3"><h1>Détails de l'annonce n°{{ ad.id }}</h1></div>
     <div class="row">
         <div class="col-6">
-            <img class="card-img mb-4" src="https://static.vecteezy.com/system/resources/previews/000/101/237/non_2x/free-abstract-background-11-vector.jpg" alt="Card image cap">
-            <a href="#" class="btn btn-warning">Répondre à cette annonce</a>
+            <img class="card-img mb-4" src="{{ asset('images/annonce.jpg') }}" alt="Card image cap">
+            <a href="mailto:{{ ad.user.email }}" class="btn btn-warning">Répondre à cette annonce</a>
+            <span class="offset-1">
+            <a href="#"><img src="{{ asset('images/favoris.png') }}" width="35px"> Ajouter aux favoris</a>
+            </span>
         </div>
         <div class="col-6">
             <div class="card" style="width: 31rem; margin:auto;">
@@ -24,6 +27,8 @@
                         <li class="list-group-item">{{ ad.city }} - {{ ad.zip }}</li>
                         <li class="list-group-item bg-dark text-white">Publiée le</li>
                         <li class="list-group-item">{{ ad.datecreated|date }}</li>
+                        <li class="list-group-item bg-dark text-white">Annonceur</li>
+                        <li class="list-group-item">{{ ad.user.username }}</li>
                     </ul>
             </div>
         </div>

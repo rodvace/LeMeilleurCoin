@@ -26,11 +26,22 @@
                         </li>
                     </ul>
                 </div>
-                <div>
+                <div class="dropdown">
                     {% if app.user %}
-                        Connecté en tant que : <strong>{{app.user.username}}</strong> (<a href="{{ path('logout') }}">se déconnecter</a>)
+
+                            <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                (<strong>{{app.user.username}}</strong>) - Actions
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="{{ path('annonces_mesannonces') }}">Mes annonces</a>
+                                <a class="dropdown-item" href="#">Mes favoris</a>
+                                <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
+                            </div>
+
+                        </div>
+
                     {% else %}
-                        <a href="{{ path('user_registration')}}"><button type="button" class="btn btn-secondary">S'inscrire</button></a>
                         <a href="{{ path('login')}}"><button type="button" class="btn btn-primary">Se Connecter</button></a>
                     {% endif %}
                 </div>
@@ -41,6 +52,10 @@
     <div class="container mt-3 mb-5">
 
         {% block body %}{% endblock %}
+
+    <div class="mb-4">
+        &nbsp;
+    </div>
 
     </div>
 

@@ -16,13 +16,29 @@ class AdRepository extends \Doctrine\ORM\EntityRepository
 SELECT a, c
 FROM AppBundle:Ad a 
 INNER JOIN a.categorie c 
-WHERE a.title LIKE :tag OR a.description LIKE :tag OR c.name LIKE :tag
+WHERE a.title LIKE :tag OR a.description LIKE :tag OR c.name LIKE :tag OR a.city LIKE :tag
 DQL;
 
         return $this
             ->getEntityManager()
             ->createQuery($dql)
             ->setParameter('tag','%'.$tag.'%')
+            ->getResult();
+
+    }
+
+    public function findMyAds($user_id)
+    {
+        $dql = <<<DQL
+SELECT a
+FROM AppBundle:Ad a
+WHERE a.user = :user_id
+DQL;
+
+        return $this
+            ->getEntityManager()
+            ->createQuery($dql)
+            ->setParameter('user_id', $user_id)
             ->getResult();
 
     }
